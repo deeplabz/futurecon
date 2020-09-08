@@ -1,0 +1,3 @@
+- Add crawler proxy list from a reliable source
+- Testing wafw00f in production, because was not getting same results as local
+- Add XSS Scanners and do it customized

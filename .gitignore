@@ -1,0 +1,10 @@
+# OSX
+*.DS_Store
+
+# Python
+venv/
+__pycache__/
+
+# Chalice
+.chalice/deployments/
+.chalice/venv/

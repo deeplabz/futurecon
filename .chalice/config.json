@@ -1,0 +1,14 @@
+{
+  "version": "2.0",
+  "app_name": "futurecon",
+  "lambda_memory_size" : 512,
+  "lambda_timeout" : 720,
+  "stages": {
+    "dev": {
+      "api_gateway_stage": "api",
+      "environment_variables": {
+        "APPLICATION": "Futurecon"
+      }
+    }
+  }
+}
