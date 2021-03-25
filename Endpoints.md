@@ -10,6 +10,76 @@ Response:
 }
 ```
 
+### GET - /assetfinder?domains=domain.com,domain2.com
+
+Response:
+```json
+{
+    "message": "assetfinder",
+    "status": "ok",
+    "matches": "<digit>",
+    "result": [
+        "subdomain",
+    ],
+}
+```
+
+### GET - /subfinder?domains=domain.com,domain2.com
+
+Response:
+```json
+{
+    "message": "subfinder",
+    "status": "ok",
+    "matches": "<digit>",
+    "result": [
+        "subdomain",
+    ],
+}
+```
+
+### GET - /findomain?domains=domain.com,domain2.com
+
+Response:
+```json
+{
+    "message": "findomain",
+    "status": "ok",
+    "matches": "<digit>",
+    "result": [
+        "subdomain",
+    ],
+}
+```
+
+### GET - /amass?domains=domain.com,domain2.com
+
+Response:
+```json
+{
+    "message": "amass",
+    "status": "ok",
+    "matches": "<digit>",
+    "result": [
+        "subdomain",
+    ],
+}
+```
+
+### GET - /github-subdomains?domains=domain.com,domain2.com&tokens=TOKEN1,TOKEN2
+
+Response:
+```json
+{
+    "message": "github-subdomains",
+    "status": "ok",
+    "matches": "<digit>",
+    "result": [
+        "subdomain",
+    ],
+}
+```
+
 ### GET - /wafw00f?domains=https://www.pichau.com.br,https://www.fastshop.com.br
 
 Response:

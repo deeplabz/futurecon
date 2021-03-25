@@ -1,40 +1,26 @@
-from core import requester
-from urllib.parse import unquote 
-import requests
-import re
-import argparse
-import os
-import sys
-import time 
-start_time = time.time()
+import os, sys, time
 
+def main(domains=[]):
+    TOOL_NAME = "waybackurls"
 
-def main(domain=[]):
-    if os.name == 'nt':
-        os.system('cls')
-
-    target = domain
+    targets = domains
     results = []
-    url = f"http://web.archive.org/cdx/search/cdx?url=*.{target}/*&output=txt&fl=original&collapse=urlkey&page=/"
 
-    response = requester.connector(url)
-    if response == False:
-        return
-    response = unquote(response)
-    
-    final_uris = response
+    for target in targets:
+        os.system(f"./chalicelib/go/bin/{TOOL_NAME} {target} >> chalicelib/{TOOL_NAME}/output-all.txt")
+        os.system(f"sort -u chalicelib/{TOOL_NAME}/output-all.txt > chalicelib/{TOOL_NAME}/output.txt")        
+            
+    file = open(f"chalicelib/{TOOL_NAME}/output.txt","r")
+    lines = file.read().splitlines()
 
-    file = open("temp.txt","w")
-    file.write(final_uris)
-    file.close
-    file = open("temp.txt","r")
-    uris = file.read().splitlines()
+    for line in lines:
+        results.append(line)
 
-    for uri in uris:
-        results.append(uri)
+    os.system(f"rm chalicelib/{TOOL_NAME}/output-all.txt chalicelib/{TOOL_NAME}/output.txt")
 
     if len(results) > 0:
-        print("Found: %s matches." % (len(results)))
+        print()
+        print(f"{TOOL_NAME.upper()} ~ Found: %s matches." % (len(results)))
         print()
         return {
             "matches": len(results),
@@ -42,5 +28,3 @@ def main(domain=[]):
         }
     else:
         return {"matches": 0, "result": []}
-
-    os.system('rm temp.txt')        

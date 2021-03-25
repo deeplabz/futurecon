@@ -1,0 +1,34 @@
+import os, sys, time
+
+def main(domains=[], tokens=[]):
+    TOOL_NAME = "github_subdomains"
+
+    targets = domains
+    results = []
+
+    for target in targets:
+        if not target.startswith("http"):
+            os.system(f"./chalicelib/go/bin/github-subdomains -d {target} -raw -q -t {tokens} >> chalicelib/{TOOL_NAME}/output-all.txt")
+            os.system(f"sort -u chalicelib/{TOOL_NAME}/output-all.txt > chalicelib/{TOOL_NAME}/output.txt")
+            os.system(f"rm {target}.txt")
+        else:
+            pass
+            
+    file = open(f"chalicelib/{TOOL_NAME}/output.txt","r")
+    lines = file.read().splitlines()
+
+    for line in lines:
+        results.append(line)
+
+    os.system(f"rm chalicelib/{TOOL_NAME}/output-all.txt chalicelib/{TOOL_NAME}/output.txt")
+
+    if len(results) > 0:
+        print()
+        print(f"{TOOL_NAME.upper()} ~ Found: %s matches." % (len(results)))
+        print()
+        return {
+            "matches": len(results),
+            "result": results,
+        }
+    else:
+        return {"matches": 0, "result": []}
